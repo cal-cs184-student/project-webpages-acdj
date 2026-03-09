@@ -39,7 +39,7 @@
 		Link to GitHub repository: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
 
 		<figure>
-			<img src="teapot.png" alt="Teapot" style="width:50%"/>
+			<img src="images/teapot.png" alt="Teapot" style="width:50%"/>
 			<figcaption>You can add images with captions!</figcaption>
 		</figure>
 
@@ -52,39 +52,95 @@
 
 		<h2>Section I: Bezier Curves and Surfaces</h2>
 
-		<h3>Part 1: Bezier curves with 1D de Casteljau subdivision</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>
+			De Casteljau's algorithm evaluates a Bezier curve at parameter \( t \in [0, 1] \) by repeatedly linearly interpolating between consecutive control points until a single point remains. Given \( n \) control points \( \mathbf{p}_0, \ldots, \mathbf{p}_{n-1} \), one step produces \( n-1 \) intermediate points:
+			\[
+				\mathbf{p}_i' = (1-t)\,\mathbf{p}_i + t\,\mathbf{p}_{i+1}, \quad i = 0, \ldots, n-2
+			\]
+			We can repeat this step until one point remains, or the point on the curve at parameter \( t \).
+		</p>
+		<p>
+			I implemented this in <code>BezierCurve::evaluateStep</code> by iterating over consecutive pairs of the input points, lerping each pair with the class member <code>t</code>, and returning the vector of \( n-1 \) points.
+		</p>
 
-		<p>Here is an example 2x2 gridlike structure using an HTML table. Each <b>tr</b> is a row and each <b>td</b> is a column in that row. You might find this useful for framing and showing your result images in an organized fashion.</p>
+		<p>Below are the de Casteljau subdivision steps for a Bezier curve with 6 control points as well as the curve and a screenshot with different \( t \) values.</p>
+
 		<div style="display: flex; flex-direction: column; align-items: center;">
 			<table style="width: 100%; text-align: center; border-collapse: collapse;">
 			  <tr>
 				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
+				  <img src="images/part1-step0.png" width="400px"/>
+				  <figcaption>Step 0: 6 original control points.</figcaption>
 				</td>
 				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
+				  <img src="images/part1-step1.png" width="400px"/>
+				  <figcaption>Step 1: 5 intermediate points.</figcaption>
 				</td>
 			  </tr>
 			  <tr>
 				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
+				  <img src="images/part1-step2.png" width="400px"/>
+				  <figcaption>Step 2: 4 intermediate points.</figcaption>
 				</td>
 				<td style="text-align: center;">
-				  <img src="teapot.png" width="400px"/>
-				  <figcaption>Caption goes here.</figcaption>
+				  <img src="images/part1-step3.png" width="400px"/>
+				  <figcaption>Step 3: 3 intermediate points.</figcaption>
 				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part1-step4.png" width="400px"/>
+				  <figcaption>Step 4: 2 intermediate points.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part1-step5.png" width="400px"/>
+				  <figcaption>Step 5: Final evaluated point on curve.</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part1-curve.png" width="400px"/>
+				  <figcaption>Bezier curve.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part1-t0.png" width="400px"/>
+				  <figcaption>Modified control points and different \( t \).</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part1-t1.png" width="400px"/>
+				  <figcaption>Modified control points and different \( t \).</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part1-t2.png" width="400px"/>
+				  <figcaption>Modified control points and different \( t \).</figcaption>
+				</td>				
 			  </tr>
 			</table>
 		</div>
 
 		<h3>Part 2: Bezier surfaces with separable 1D de Casteljau</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>
+			A Bezier patch is defined by an \( n \times n \) grid of 3D control points. To evaluate the surface at parameters \( (u, v) \), I used the following approach:
+		</p>
+		<ol>
+			<li>For each row of control points, run the full 1D de Casteljau algorithm with parameter \( u \) to collapse each row to a single 3D point.</li>
+			<li>Treat the resulting \( n \) column points as a new 1D curve and run de Casteljau with parameter \( v \) to get the final surface point.</li>
+		</ol>
+		<p>
+			This is implemented via three functions:
+		</p>
+		<ul>
+			<li><code>evaluateStep(points, t)</code>: one lerp reduction step in 3D with \( t \) as a parameter.</li>
+			<li><code>evaluate1D(points, t)</code>: repeatedly applies <code>evaluateStep</code> until a single point remains.</li>
+			<li><code>evaluate(u, v)</code>: applies <code>evaluate1D</code> with \( u \) to each row, collects the results, and finally applies <code>evaluate1D</code> with \( v \).</li>
+		</ul>
 
-		<h2>Section II: Triangle Meshes and Half-Edge Data Structure</h2>
+		<figure>
+			<img src="images/part2-teapot.png" width="600px"/>
+			<figcaption>Teapot rendered from Bezier patches using separable de Casteljau evaluation.</figcaption>
+		</figure>
 
 		<h3>Part 3: Area-weighted vertex normals</h3>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.

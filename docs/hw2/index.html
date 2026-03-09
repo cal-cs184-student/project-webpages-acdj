@@ -63,7 +63,7 @@
 			I implemented this in <code>BezierCurve::evaluateStep</code> by iterating over consecutive pairs of the input points, lerping each pair with the class member <code>t</code>, and returning the vector of \( n-1 \) points.
 		</p>
 
-		<p>Below are the de Casteljau subdivision steps for a Bezier curve with 6 control points as well as the curve and a screenshot with different \( t \) values.</p>
+		<p>The images below show the de Casteljau subdivision steps for a Bezier curve with 6 control points as well as the curve and a screenshot with different \( t \) values.</p>
 
 		<div style="display: flex; flex-direction: column; align-items: center;">
 			<table style="width: 100%; text-align: center; border-collapse: collapse;">
@@ -137,36 +137,139 @@
 			<li><code>evaluate(u, v)</code>: applies <code>evaluate1D</code> with \( u \) to each row, collects the results, and finally applies <code>evaluate1D</code> with \( v \).</li>
 		</ul>
 
+		<p>The image below shows the teapot rendered from Bezier patches using separable de Casteljau evaluation.</p>
+
 		<figure>
 			<img src="images/part2-teapot.png" width="600px"/>
 			<figcaption>Teapot rendered from Bezier patches using separable de Casteljau evaluation.</figcaption>
 		</figure>
 
 		<h3>Part 3: Area-weighted vertex normals</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>
+			To compute an area-weighted vertex normal, I walk around all incident faces using a do-while loop with the pattern <code>h = h->twin()->next()</code>. For each non-boundary face, I compute <code>cross(p1 - p0, p2 - p0)</code> where p0 is this vertex and p1, p2 are the next two vertices around the face. The magnitude of this cross product equals twice the triangle's area, so accumulating these vectors and calling <code>.unit()</code> automatically produces an area-weighted average. The function must use <code>HalfedgeCIter</code> (const iterators) since <code>normal()</code> is a <code>const</code> method.
+		</p>
+		<p>The images below show the teapot with flat shading (left) and Phong shading (right).</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part3-flat.png" width="400px"/>
+				  <figcaption>Teapot with flat shading.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part3-phong.png" width="400px"/>
+				  <figcaption>Teapot with Phong shading (area-weighted normals).</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		<h3>Part 4: Edge flip</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>
+			I implemented the edge flip by reconnecting the shared edge between two triangles to connect the opposite pair of vertices instead. My implementation uses a systematic pointer-reassignment approach: label every element first (6 halfedges h0-h5, 4 vertices va-vd, 2 faces f0-f1, edge e0), then call <code>setNeighbors</code> on every halfedge, even those whose values don't change. This exhaustive approach prevents bugs from forgetting a single pointer. I return early if the edge is on a boundary and create no new elements.
+		</p>
+		<p>
+			The images below show the teapot before and after edge flips.
+		</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part4-before.png" width="400px"/>
+				  <figcaption>Teapot before edge flips.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part4-after.png" width="400px"/>
+				  <figcaption>Teapot after several edge flips.</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		<h3>Part 5: Edge split</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>
+			I implemented the edge split by inserting a midpoint vertex m on the shared edge and connecting it to the two opposite vertices, turning 2 triangles into 4. This requires creating 1 new vertex (vm at midpoint), 3 new edges (e5 for m-c, e6 for a-m, e7 for m-d), 2 new faces (f2, f3), and 6 new halfedges. I again label all 12 halfedges (6 existing, 6 new) and call <code>setNeighbors</code> on each.
+		</p>
+		<p>
+			The <code>isNew</code> flags are important for Part 6, e0 and e5 (the two halves of the original split edge) get <code>isNew = false</code>; e6 and e7 (the new crossing edges) get <code>isNew = true</code>; vm gets <code>isNew = true</code>.
+		</p>
+		<p>
+			The images below show the teapot before and after edge splits.
+		</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part5-before.png" width="400px"/>
+				  <figcaption>Before any splits.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part5-splits.png" width="400px"/>
+				  <figcaption>After edge splits only.</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part5-before2.png" width="400px"/>
+				  <figcaption>Before splits and flips.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part5-splits-and-flips.png" width="400px"/>
+				  <figcaption>After both splits and flips.</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		<h3>Part 6: Loop subdivision for mesh upsampling</h3>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-		<h2>(Optional) Section III: Potential Extra Credit - Art Competition: Model something Creative</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-		<h2>Additional Notes (please remove)</h2>
-		<ul>
-			<li>You can also add code if you'd like as so: <code>code code code</code></li>
-			<li>If you'd like to add math equations, 
-				<ul>
-					<li>You can write inline equations like so: \( a^2 + b^2 = c^2 \)</li>
-					<li>You can write display equations like so: \[ a^2 + b^2 = c^2 \]</li>
-				</ul>
-			</li>
-		</ul>
+		<p>
+			Loop subdivision increases mesh resolution while smoothing the surface. I implemented this with the following steps:
+		<ol>
+			<li><strong>Old vertex positions:</strong> For each original vertex with degree \( n \), compute \( (1 - nu) \cdot \mathbf{p} + u \cdot \sum_{\text{neighbors}} \mathbf{q} \), where \( u = 3/16 \) if \( n = 3 \), else \( u = 3/(8n) \). Set this in <code>newPosition</code>, set <code>isNew = false</code>.</li>
+			<li><strong>Edge midpoint positions:</strong> For each original edge with endpoints A, B and opposite vertices C, D, compute \( \frac{3}{8}(A+B) + \frac{1}{8}(C+D) \). Set this in <code>e->newPosition</code>.</li>
+			<li><strong>Split all original edges:</strong> Snapshot original edges into a vector first to avoid splitting newly created edges. Copy <code>e->newPosition</code> to <code>vm->newPosition</code> after each split.</li>
+			<li><strong>Flip new crossing edges:</strong> Flip every edge with <code>isNew == true</code> whose two endpoints have different <code>isNew</code> status (one old, one new).</li>
+			<li><strong>Copy positions:</strong> For all vertices, set <code>position = newPosition</code>.</li>
+		</ol>
+		<p>
+			Sharp corners get smoothed because the loop weights allow each vertex to move towards its neighbors' average. The cube subdivides asymmetrically because each face has a single diagonal, making the triangulation asymmetric. Pre-splitting each face's diagonal by creating an X pattern makes the mesh symmetric before subdivision, producing a symmetric result.
+		</p>
+		<p>
+			The images below show the cube being subdivided multiple times as well as the cube being subdivided with and without pre-processing.
+		</p>
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part6-subdivision0.png" width="400px"/>
+				  <figcaption>Original mesh.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part6-subdivision1.png" width="400px"/>
+				  <figcaption>After 1 subdivision.</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part6-subdivision2.png" width="400px"/>
+				  <figcaption>After 2 subdivisions.</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part6-subdivision3.png" width="400px"/>
+				  <figcaption>After 3 subdivisions.</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="images/part6-cube-asymmetric.png" width="400px"/>
+				  <figcaption>Cube subdivided without pre-processing (asymmetric).</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="images/part6-cube-symmetric.png" width="400px"/>
+				  <figcaption>Cube subdivided after splitting diagonals (symmetric).</figcaption>
+				</td>
+			  </tr>
+			</table>
 		</div>
 	</body>
 </html>

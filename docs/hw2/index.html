@@ -28,15 +28,15 @@
 	<body>
 		<div class="container">
 		<h1>CS184/284A Spring 2025 Homework 2 Write-Up</h1>
-		<div style="text-align: center;">Names: </div>
+		<div style="text-align: center;">Names: Daniel Wang</div>
 
 		<br>
 
-		Link to webpage: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
+		Link to webpage: <a href="https://cal-cs184-student.github.io/hw-webpages-d-wwwang/">cal-cs184-student.github.io/hw-webpages-d-wwwang/</a>
 
 		<br>
 		
-		Link to GitHub repository: (TODO) <a href="https://cs184.eecs.berkeley.edu/sp25">cs184.eecs.berkeley.edu/sp25</a>
+		Link to GitHub repository: <a href="https://github.com/cal-cs184-student/hw2-meshedit-d-wwwang">github.com/cal-cs184-student/hw2-meshedit-d-wwwang</a>
 
 		<figure>
 			<img src="images/teapot.png" alt="Teapot" style="width:50%"/>
@@ -48,7 +48,12 @@
 		-->
 
 		<h2>Overview</h2>
-		Give a high-level overview of what you implemented in this homework. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the homework.
+		<p>
+			In this homework I implemented geometric modeling tools across two representations: parametric curves/surfaces and triangle meshes. The first section covers Bezier curve and patch evaluation via de Casteljau's algorithm (Parts 1-2). The second section covers operations on halfedge meshes: area-weighted vertex normals for smooth shading (Part 3), edge flip and edge split as the fundamental local mesh editing operations (Parts 4-5), and loop subdivision for progressive mesh upsampling (Part 6).
+		</p>
+		<p>
+			The most interesting thing I learned is how effective pre-processing edges is in creating asymmetric or symmetric cubes during loop subdivision. I had never thought of how something as simple as splitting edges can lead to significantly different results visually, all based on math!
+		</p>
 
 		<h2>Section I: Bezier Curves and Surfaces</h2>
 

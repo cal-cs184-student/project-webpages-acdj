@@ -16,15 +16,15 @@ nav_order: 2
 
 ## Summary
 
-We propose to build a physically-based shader pack for Minecraft Java Edition that replaces the default flat, texture-only lighting model with material-aware rendering. Where vanilla Minecraft treats all surfaces similarly regardless of whether they're glass, stone, or metal, our system introduces physically-inspired material models that simulate how different surfaces actually interact with light. First we will implement a rendering pipeline as a group, then each team member will implement a distinct material type, and we will present both individual material studies and a unified Minecraft scene demonstrating the full system.
+We will modify an existing Minecraft Java Edition shader pack to replace/augment its current diffuse/specular lighting with a simplified Cook–Torrance microfacet BRDF. We will evaluate how the BRDF changes material appearance (stone vs metal vs glass/water) and quantify the performance impact in a controlled, repeatable scene. Our final deliverables will include a demo video, side-by-side visual comparisons, and a report analyzing quality/performance trade-offs.
 
 ---
 
 ## Problem Description
 
-Minecraft's default renderer prioritizes simplicity and performance, using largely uniform shading with minimal differentiation between material types. As a result, surfaces like stone, glass, and metal look visually similar aside from their textures — lacking the rich appearance differences seen in real life or physically-based rendering systems.
+Minecraft's default renderer prioritizes simplicity and performance, using largely uniform shading with minimal differentiation between material types. As a result, surfaces like stone, glass, and metal look visually similar aside from their textures, lacking the rich appearance differences seen in real life or physically-based rendering systems.
 
-The core challenge is introducing **material-specific light interaction** into Minecraft's voxel world. Real materials differ not just in color and texture, but in how they reflect, absorb, and transmit light — glass refracts and reflects, metals produce view-dependent highlights, and rough surfaces like terracotta scatter light diffusely. Beyond the material models themselves, adapting physically-based rendering to a discrete, grid-based voxel world introduces unique challenges around block boundaries and data transmission from the game to the GPU.
+The core challenge is introducing **material-specific light interaction** into Minecraft's voxel world. Real materials differ not just in color and texture, but in how they reflect, absorb, and transmit light (glass refracts and reflects, metals produce view-dependent highlights, and rough surfaces like terracotta scatter light diffusely). Beyond the material models themselves, adapting physically-based rendering to a discrete, grid-based voxel world introduces unique challenges around block boundaries and data transmission from the game to the GPU.
 
 Our approach is to build a **modular shader system** that supports diverse material behaviors while remaining compatible with Minecraft's rendering pipeline, using the Complementary shader framework.
 
@@ -32,7 +32,7 @@ Our approach is to build a **modular shader system** that supports diverse mater
 
 ## Goals and Deliverables
 
-### Baseline (Must-Haves)
+### Plan to Deliver
 
 **Core System**
 
@@ -62,7 +62,7 @@ Our approach is to build a **modular shader system** that supports diverse mater
 
 ---
 
-### Aspirational (Reach Goals)
+### Hope to Deliver
 
 - Frosted or rough glass variants
 - Layered material effects (e.g., glazed terracotta)

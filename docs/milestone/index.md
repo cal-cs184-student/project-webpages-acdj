@@ -85,6 +85,8 @@ Based on feedback from our project mentor, we are also **expanding scope** in tw
 - **Dynamic lighting (core deliverable)**: Full support for in-game point lights (torches, lanterns, glowstone) driving the BRDF per-fragment, with each source contributing its own diffuse and specular term
 - **Performance benchmarking**: Record FPS in a controlled scene across four configurations, (1) vanilla Minecraft, (2) BSDF shader only, (3) shader + LabPBR textures, (4) shader + LabPBR + SSR + dynamic lighting, with frame time analysis identifying per-feature GPU cost
 - **Optimization pass**: Profile with Iris debug tools; reduce shader branching, batch texture lookups, evaluate light loop culling
+- **Enchantment glint effect**: Procedural animated shimmer overlay on enchanted items, driven by a time-varying UV distortion pass to simulate the characteristic iridescent sheen
+- **Mace impact effect**: Vertex displacement shockwave in the terrain shader, a sinusoidal wave radiating outward from the point of impact, timed to the mace hit animation
 - Final vanilla vs. PBR side-by-side comparison screenshots and video flythrough
 - Complete final webpage and project report
 

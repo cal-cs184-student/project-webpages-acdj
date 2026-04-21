@@ -95,4 +95,4 @@ Based on feedback from our project mentor, we are also **expanding scope** in tw
 ## Resources
 
 - [Milestone Slides](https://docs.google.com/presentation/d/1uaRI1bRegSA4cSa9Jimis39nfHwSqWpq/edit?usp=sharing&ouid=108387346108570320160&rtpof=true&sd=true)
-- [Milestone Video](TODO)
+- [Milestone Video](https://drive.google.com/file/d/1TXXl3thTmJDppGU9ATXgUybMNCb-c4aB/view?usp=sharing)

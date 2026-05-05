@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Material Lab — A Physically-Based Rendering Shader Pack for Minecraft</title>
+<title>Material Lab: A Physically-Based Rendering Shader Pack for Minecraft</title>
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -408,7 +408,7 @@ section.chapter {
 }
 
 /* ========================================================================
-   PROSE — main column with optional sidenote rail
+   PROSE: main column with optional sidenote rail
    ======================================================================== */
 
 .prose-grid {
@@ -1074,7 +1074,7 @@ footer.colophon {
      ═══════════════════════════════════════════════════════════════════════ -->
 <header class="runninghead">
   <div class="left">Material Lab · A Real-Time PBR Pipeline</div>
-  <div class="center">CS 184 — FINAL</div>
+  <div class="center">CS 184 · FINAL</div>
   <div class="right">UC Berkeley · Spring 2026</div>
 </header>
 
@@ -1106,7 +1106,7 @@ footer.colophon {
       <span class="lab">Lab.</span>
     </h1>
     <p class="hero-sub">
-      Re-engineering Minecraft's flat lighting into a physically-grounded shading system —
+      Re-engineering Minecraft's flat lighting into a physically-grounded shading system:
       complete with Cook-Torrance microfacets, screen-space ray marching,
       and <em>material-aware reflections</em> that respond to roughness, metallicity, and view angle.
     </p>
@@ -1135,7 +1135,7 @@ footer.colophon {
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════════
-     00 — ABSTRACT
+     00: ABSTRACT
      ═══════════════════════════════════════════════════════════════════════ -->
 <section class="chapter" id="abstract">
   <div class="shell">
@@ -1145,7 +1145,7 @@ footer.colophon {
         <h2 class="section-title">An exercise in <em>making blocks feel real.</em></h2>
         <p class="section-deck">
           We replaced Minecraft's default lighting with a unified physically-based
-          rendering pipeline — Cook-Torrance microfacets driven by per-pixel material
+          rendering pipeline: Cook-Torrance microfacets driven by per-pixel material
           properties, screen-space reflections, ambient occlusion, and a procedural sky.
           Everything runs in real time.
         </p>
@@ -1165,7 +1165,7 @@ footer.colophon {
         <p>
           Beyond the forward shading pass, we added a deferred composite stage that
           ray-marches both <strong>screen-space ambient occlusion</strong> and
-          <strong>screen-space reflections</strong> against the depth buffer — a minimal
+          <strong>screen-space reflections</strong> against the depth buffer: a minimal
           ray-tracing MVP that delivers grounded contact shadows and material-aware
           reflections without leaving the GPU's comfort zone. When a reflection ray
           escapes the screen, a procedural environment probe takes over so metals
@@ -1198,7 +1198,7 @@ footer.colophon {
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════════
-     01 — PIPELINE
+     01: PIPELINE
      ═══════════════════════════════════════════════════════════════════════ -->
 <section class="chapter" id="pipeline">
   <div class="shell">
@@ -1253,7 +1253,7 @@ footer.colophon {
 
         <!-- Stage 1 -->
         <g transform="translate(40,60)">
-          <text x="0" y="-22" fill="#e89854" font-family="Fraunces, serif" font-size="11" font-weight="500" letter-spacing="2.4">STAGE 01 — GBUFFERS_*</text>
+          <text x="0" y="-22" fill="#e89854" font-family="Fraunces, serif" font-size="11" font-weight="500" letter-spacing="2.4">STAGE 01: GBUFFERS_*</text>
           <rect x="0" y="0" width="240" height="320" fill="#16140f" stroke="#2a2620" rx="3"/>
           <rect x="0" y="0" width="3" height="320" fill="#e89854"/>
           <text x="20" y="36" fill="#ebe5d4" font-family="Fraunces, serif" font-style="italic" font-size="20">Per-object</text>
@@ -1277,7 +1277,7 @@ footer.colophon {
 
         <!-- Stage 2 -->
         <g transform="translate(400,60)">
-          <text x="0" y="-22" fill="#7ab3ad" font-family="Fraunces, serif" font-size="11" font-weight="500" letter-spacing="2.4">STAGE 02 — COMPOSITE</text>
+          <text x="0" y="-22" fill="#7ab3ad" font-family="Fraunces, serif" font-size="11" font-weight="500" letter-spacing="2.4">STAGE 02: COMPOSITE</text>
           <rect x="0" y="0" width="320" height="320" fill="#16140f" stroke="#2a2620" rx="3"/>
           <rect x="0" y="0" width="3" height="320" fill="#7ab3ad"/>
           <text x="20" y="36" fill="#ebe5d4" font-family="Fraunces, serif" font-style="italic" font-size="20">Full-screen ray-marched</text>
@@ -1306,7 +1306,7 @@ footer.colophon {
 
         <!-- Stage 3 -->
         <g transform="translate(840,60)">
-          <text x="0" y="-22" fill="#ebe5d4" font-family="Fraunces, serif" font-size="11" font-weight="500" letter-spacing="2.4">STAGE 03 — FINAL</text>
+          <text x="0" y="-22" fill="#ebe5d4" font-family="Fraunces, serif" font-size="11" font-weight="500" letter-spacing="2.4">STAGE 03: FINAL</text>
           <rect x="0" y="0" width="220" height="320" fill="#16140f" stroke="#2a2620" rx="3"/>
           <rect x="0" y="0" width="3" height="320" fill="#ebe5d4"/>
           <text x="20" y="36" fill="#ebe5d4" font-family="Fraunces, serif" font-style="italic" font-size="20">Blit to</text>
@@ -1329,7 +1329,7 @@ footer.colophon {
       <div class="prose">
         <h3>Why deferred</h3>
         <p>
-          Per-object gbuffer passes let us treat each material class differently — water
+          Per-object gbuffer passes let us treat each material class differently: water
           needs Fresnel and alpha, the enchantment glint wants additive blending, and
           terrain wants the full forward Cook-Torrance treatment. The MRT G-buffer then
           decouples shading from screen-space effects: <strong>composite doesn't care
@@ -1337,7 +1337,7 @@ footer.colophon {
           a normal, depth, roughness, and metallic value.
         </p>
         <p>
-          Composite runs once per frame instead of per object — a critical optimization
+          Composite runs once per frame instead of per object: a critical optimization
           since SSAO and SSR each ray-march thousands of times per pixel. Final is
           intentionally a passthrough; it's the natural slot for tonemap and bloom in
           future work.
@@ -1353,7 +1353,7 @@ footer.colophon {
         <div class="sidenote cool">
           <span class="sidenote-label">Shared code, future refactor</span>
           <span class="mono">terrain</span>, <span class="mono">entities</span>, and
-          <span class="mono">hand</span> share ~90% of their code — three copies of
+          <span class="mono">hand</span> share ~90% of their code: three copies of
           the same Cook-Torrance forward shader. A future pass would extract the
           common path into a shared <span class="mono">.glsl</span> include.
         </div>
@@ -1363,7 +1363,7 @@ footer.colophon {
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════════
-     02 — CONTRIBUTIONS / FEATURE OVERVIEW
+     02: CONTRIBUTIONS / FEATURE OVERVIEW
      ═══════════════════════════════════════════════════════════════════════ -->
 <section class="chapter" id="contributions">
   <div class="shell">
@@ -1403,7 +1403,7 @@ footer.colophon {
       <div class="feature-card">
         <div class="num">05 · LIGHTING</div>
         <h4>Four-source lighting</h4>
-        <p>Direct sun, virtual block-light, dual held-item point lights, baked ambient — all summed under the same BRDF for consistent shading.</p>
+        <p>Direct sun, virtual block-light, dual held-item point lights, baked ambient: all summed under the same BRDF for consistent shading.</p>
       </div>
       <div class="feature-card">
         <div class="num">06 · ENVIRONMENT</div>
@@ -1418,7 +1418,7 @@ footer.colophon {
       <div class="feature-card">
         <div class="num">08 · TRANSLUCENCY</div>
         <h4>Fresnel water &amp; glass</h4>
-        <p>Schlick-mixed transmission and reflection. Transparent at your feet, mirror-like at the horizon — without losing the sky beneath.</p>
+        <p>Schlick-mixed transmission and reflection. Transparent at your feet, mirror-like at the horizon, without losing the sky beneath.</p>
       </div>
       <div class="feature-card">
         <div class="num">09 · STRETCH</div>
@@ -1430,7 +1430,7 @@ footer.colophon {
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════════
-     03 — COOK-TORRANCE BRDF
+     03: COOK-TORRANCE BRDF
      ═══════════════════════════════════════════════════════════════════════ -->
 <section class="chapter" id="brdf">
   <div class="shell">
@@ -1440,7 +1440,7 @@ footer.colophon {
         <h2 class="section-title">The <em>microfacet</em> model.</h2>
         <p class="section-deck">
           A Cook-Torrance specular term replaces vanilla's flat dot-product. Three
-          standard pieces — D, F, G — assembled with energy conservation and a
+          standard pieces (D, F, and G), assembled with energy conservation and a
           Lambertian diffuse companion.
         </p>
       </div>
@@ -1462,7 +1462,7 @@ footer.colophon {
         <h3>The three terms</h3>
 
         <p>
-          <strong>D — GGX / Trowbridge-Reitz</strong> controls how concentrated highlights are.
+          <strong>D: GGX / Trowbridge-Reitz</strong> controls how concentrated highlights are.
           A rough surface spreads its specular lobe wide; a polished one focuses it into a tight spike.
         </p>
 
@@ -1471,8 +1471,8 @@ footer.colophon {
         </div>
 
         <p>
-          <strong>F — Schlick's Fresnel</strong> approximates the Fresnel equations. At grazing
-          angles, every surface reflects more — even chalk gets shiny when you tilt it
+          <strong>F: Schlick's Fresnel</strong> approximates the Fresnel equations. At grazing
+          angles, every surface reflects more; even chalk gets shiny when you tilt it
           toward the light.
         </p>
 
@@ -1481,7 +1481,7 @@ footer.colophon {
         </div>
 
         <p>
-          <strong>G — Smith-GGX (height correlated)</strong> models how microfacets shadow and
+          <strong>G: Smith-GGX (height correlated)</strong> models how microfacets shadow and
           mask each other. Without it, rough surfaces over-brighten at glancing angles.
         </p>
 
@@ -1490,7 +1490,7 @@ footer.colophon {
           Diffuse uses Lambert. The trick is enforcing energy conservation: the share of
           energy reflected specularly cannot also leave as diffuse, so we scale the
           diffuse lobe by <code>(1 − F)</code>. Metals additionally have no diffuse
-          response — conductors absorb the transmitted component. We bake both into a
+          response: conductors absorb the transmitted component. We bake both into a
           single weight:
         </p>
 
@@ -1512,7 +1512,7 @@ footer.colophon {
           before squaring it for <code>α²</code>.</li>
           <li><strong>NaN from the half vector.</strong> When the light points away from the surface,
           <code>V + L</code> can collapse to zero and <code>normalize()</code> returns NaN.
-          We fall back to <code>H = N</code> in that case — invisible because the
+          We fall back to <code>H = N</code> in that case; invisible because the
           specular term is gated by <code>NdotL</code>, but stable.</li>
         </ul>
       </div>
@@ -1572,13 +1572,13 @@ footer.colophon {
           <div class="figure-frame">
             <div class="figure-placeholder"><span>Figure 1A</span><em>Vanilla Lambertian</em></div>
           </div>
-          <div class="figure-caption"><b>Fig. 1A</b>Vanilla Minecraft lighting — flat diffuse, no view-dependent response.</div>
+          <div class="figure-caption"><b>Fig. 1A</b>Vanilla Minecraft lighting: flat diffuse, no view-dependent response.</div>
         </div>
         <div>
           <div class="figure-frame">
             <div class="figure-placeholder"><span>Figure 1B</span><em>Cook-Torrance</em></div>
           </div>
-          <div class="figure-caption"><b>Fig. 1B</b>Material Lab — surfaces respond to view angle, roughness, and metallicity.</div>
+          <div class="figure-caption"><b>Fig. 1B</b>Material Lab: surfaces respond to view angle, roughness, and metallicity.</div>
         </div>
       </div>
     </div>
@@ -1592,14 +1592,14 @@ footer.colophon {
   <div class="shell">
     <div class="pullquote reveal">
       Same blocks. <em>Different physics.</em><br>
-      Every material parameter is unpacked from a texture —
+      Every material parameter is unpacked from a texture:
       not hard-coded, not switch-cased, just <em>data flowing through a uniform pipeline</em>.
     </div>
   </div>
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════════
-     04 — MATERIAL SYSTEM
+     04: MATERIAL SYSTEM
      ═══════════════════════════════════════════════════════════════════════ -->
 <section class="chapter" id="material">
   <div class="shell">
@@ -1609,7 +1609,7 @@ footer.colophon {
         <h2 class="section-title">Driving the BRDF from <em>texture maps.</em></h2>
         <p class="section-deck">
           LabPBR 1.3 packs roughness, F₀, and emission into a single specular texture's
-          channels. Our shader decodes them per-pixel — no special-cased materials.
+          channels. Our shader decodes them per-pixel, with no special-cased materials.
         </p>
       </div>
     </div>
@@ -1622,8 +1622,8 @@ footer.colophon {
           beyond its diffuse:
         </p>
         <ul>
-          <li><code>_n.png</code> — tangent-space normal map, plus a height channel</li>
-          <li><code>_s.png</code> — specular map: smoothness, F₀, porosity, emission</li>
+          <li><code>_n.png</code>: tangent-space normal map, plus a height channel</li>
+          <li><code>_s.png</code>: specular map: smoothness, F₀, porosity, emission</li>
         </ul>
 
         <h3>The LabPBR 1.3 spec map</h3>
@@ -1632,14 +1632,14 @@ footer.colophon {
         </p>
 
         <div class="equation" data-eq="EQ. 05">
-          <div class="eq-label">Roughness — from R channel</div>
+          <div class="eq-label">Roughness (from R channel)</div>
           $$ \text{roughness} = (1 - \text{R})^2 $$
         </div>
 
         <p>
           The green channel does double duty: a value in <code>[0, 229]</code> encodes
           a dielectric F₀ in the realistic range <code>[0, 0.08]</code>. A value in
-          <code>[230, 255]</code> flags a metal — for which we use <code>F₀ = albedo</code>,
+          <code>[230, 255]</code> flags a metal, for which we use <code>F₀ = albedo</code>,
           since conductors tint their own reflections.
         </p>
 
@@ -1657,8 +1657,8 @@ footer.colophon {
         <p>
           Because every behavior is data-driven, swapping in a new resource pack
           changes the entire visual response of the world. We exploited this in
-          our material experiments — adding <code>_s</code> textures to bedrock,
-          tuning andesite's green channel, controlling cobblestone reflectivity —
+          our material experiments: adding <code>_s</code> textures to bedrock,
+          tuning andesite's green channel, controlling cobblestone reflectivity,
           to verify that the pipeline was correctly responding to changes in
           encoded F₀ and roughness.
         </p>
@@ -1678,7 +1678,7 @@ footer.colophon {
         </div>
         <div class="sidenote">
           <span class="sidenote-label">Sentinel encoding</span>
-          A G value of 230 isn't physically meaningful — it's a sentinel. The
+          A G value of 230 isn't physically meaningful; it's a sentinel. The
           spec uses out-of-band values to flag conductors, similar to how
           <span class="mono">α &lt; 254</span> flags emission.
         </div>
@@ -1727,7 +1727,7 @@ footer.colophon {
           <div class="figure-frame">
             <div class="figure-placeholder"><span>Figure 2B</span><em>Andesite, green-channel tuned</em></div>
           </div>
-          <div class="figure-caption"><b>Fig. 2B</b>Andesite tuned to behave more metallic — no shader changes required.</div>
+          <div class="figure-caption"><b>Fig. 2B</b>Andesite tuned to behave more metallic, with no shader changes required.</div>
         </div>
       </div>
     </div>
@@ -1735,7 +1735,7 @@ footer.colophon {
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════════
-     05 — SCREEN-SPACE FRAMEWORK
+     05: SCREEN-SPACE FRAMEWORK
      ═══════════════════════════════════════════════════════════════════════ -->
 <section class="chapter" id="screenspace">
   <div class="shell">
@@ -1755,7 +1755,7 @@ footer.colophon {
       <div class="prose">
         <p>
           The composite pass is where the most CS184-relevant work lives. We don't
-          have a real BVH or a world-space scene — but we do have the depth buffer,
+          have a real BVH or a world-space scene, but we do have the depth buffer,
           which is a perfectly serviceable height field of the visible scene.
           March a ray through it, sample depths along the way, and check whether
           the ray has crossed in front of or behind a surface.
@@ -1767,7 +1767,7 @@ footer.colophon {
           For each pixel, we cast 4 rays into the surface's hemisphere and march each
           for 8 steps. Hemisphere directions are cosine-weighted for natural falloff,
           oriented through a TBN frame built from the view-space normal. Per-pixel
-          rotation is seeded by interleaved gradient noise — Jorge Jiménez's
+          rotation is seeded by interleaved gradient noise: Jorge Jiménez's
           deterministic, screen-space-friendly hash that breaks up patterns without
           looking like film grain.
         </p>
@@ -1779,7 +1779,7 @@ footer.colophon {
 
         <p>
           A sample is counted as occluded when its marched view-space position lies
-          behind the depth buffer's reconstructed surface — i.e. the ray walked
+          behind the depth buffer's reconstructed surface, i.e., the ray walked
           <em>into</em> something rather than past it. We accumulate occlusion across
           all rays and steps, then convert to visibility:
         </p>
@@ -1801,7 +1801,7 @@ footer.colophon {
 
         <h3>5.3 Procedural environment probe</h3>
         <p>
-          When SSR misses — rays leave the screen, or they hit the sky — we synthesize
+          When SSR misses (when rays leave the screen, or they hit the sky), we synthesize
           a reflection in real time. A height-gradient sky with a horizon band, a sun
           specular lobe whose exponent ranges 140–420 based on metallic value
           (sharper highlights on shinier metals), and a subtle ground-bounce term.
@@ -1814,11 +1814,11 @@ footer.colophon {
           The composite pass treats metals and dielectrics differently:
         </p>
         <ul>
-          <li><strong>Metallic &gt; 0.38</strong> — SSR is mixed with the procedural probe (probe is the
+          <li><strong>Metallic &gt; 0.38</strong>: SSR is mixed with the procedural probe (probe is the
           base, SSR overrides where it has hits), with a grazing-angle Fresnel boost.
           Armor and weapons stay reflective even when the screen geometry doesn't
           cover their full reflection hemisphere.</li>
-          <li><strong>Smooth dielectrics (roughness &lt; 0.42)</strong> — SSR only, no fake sky probe
+          <li><strong>Smooth dielectrics (roughness &lt; 0.42)</strong>: SSR only, no fake sky probe
           (which would look wrong on glass and wet surfaces).</li>
         </ul>
       </div>
@@ -1834,11 +1834,11 @@ footer.colophon {
           <span class="sidenote-label">Binary search</span>
           Once we know the ray crossed a surface between step <em>k</em> and <em>k+1</em>,
           we bisect. Eight iterations halves the error to ~1/256 of the final step
-          length — invisible at any reasonable resolution.
+          length, invisible at any reasonable resolution.
         </div>
         <div class="sidenote">
           <span class="sidenote-label">Why IGN</span>
-          Halton, blue noise, and white noise all work too — but IGN is one cheap
+          Halton, blue noise, and white noise all work too, but IGN is one cheap
           fract/dot/sin and decorrelates beautifully across screen pixels without
           needing a precomputed texture.
         </div>
@@ -1865,7 +1865,7 @@ footer.colophon {
     <span class="kw">float</span> diff         = currentPos.z - sampledPos.z;
 
     <span class="kw">if</span> (diff &lt; <span class="num">0.0</span> &amp;&amp; diff &gt; -<span class="fn">max</span>(<span class="num">3.0</span>, stepSize * <span class="num">2.0</span>)) {
-        <span class="com">// Binary search refinement — 8 iterations</span>
+        <span class="com">// Binary search refinement: 8 iterations</span>
         <span class="kw">for</span> (<span class="kw">int</span> j = <span class="num">0</span>; j &lt; <span class="num">8</span>; j++) {
             <span class="ty">vec3</span> midPos = (lastPos + currentPos) * <span class="num">0.5</span>;
             <span class="kw">if</span> (midPos.z &lt; <span class="fn">getViewPos</span>(<span class="fn">viewToScreen</span>(midPos)).z) currentPos = midPos;
@@ -1882,13 +1882,13 @@ footer.colophon {
           <div class="figure-frame">
             <div class="figure-placeholder"><span>Figure 3A</span><em>SSAO off</em></div>
           </div>
-          <div class="figure-caption"><b>Fig. 3A</b>Without SSAO — objects float, contact shadows missing.</div>
+          <div class="figure-caption"><b>Fig. 3A</b>Without SSAO: objects float, contact shadows missing.</div>
         </div>
         <div>
           <div class="figure-frame">
             <div class="figure-placeholder"><span>Figure 3B</span><em>SSAO on</em></div>
           </div>
-          <div class="figure-caption"><b>Fig. 3B</b>With ray-marched SSAO — corners darken, geometry grounds itself.</div>
+          <div class="figure-caption"><b>Fig. 3B</b>With ray-marched SSAO: corners darken, geometry grounds itself.</div>
         </div>
         <div>
           <div class="figure-frame">
@@ -1908,7 +1908,7 @@ footer.colophon {
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════════
-     06 — DYNAMIC LIGHTING
+     06: DYNAMIC LIGHTING
      ═══════════════════════════════════════════════════════════════════════ -->
 <section class="chapter" id="lighting">
   <div class="shell">
@@ -1917,7 +1917,7 @@ footer.colophon {
       <div>
         <h2 class="section-title">Four lights, <em>one BRDF.</em></h2>
         <p class="section-deck">
-          Direct sun, virtual block-light, dual held-item point lights, ambient — all
+          Direct sun, virtual block-light, dual held-item point lights, ambient: all
           summed under the same Cook-Torrance evaluation for consistent shading
           across light types.
         </p>
@@ -1934,16 +1934,16 @@ footer.colophon {
           inputs, we build four light contributions.
         </p>
 
-        <h4>1 — Sun and moon</h4>
+        <h4>1. Sun and moon</h4>
         <p>
           Full Cook-Torrance against <code>shadowLightPosition</code>, modulated by the
           lightmap's sky channel (<code>lmcoord.y</code>) so caves go dark. Standard.
         </p>
 
-        <h4>2 — Block light (torches, glowstone)</h4>
+        <h4>2. Block light (torches, glowstone)</h4>
         <p>
           The lightmap gives us brightness but no direction. We approximate the
-          dominant placement of light sources — floor-mounted torches — by treating
+          dominant placement of light sources (floor-mounted torches) by treating
           <em>world-up</em> as a virtual light direction in view space:
         </p>
 
@@ -1953,14 +1953,14 @@ footer.colophon {
         </div>
 
         <p>
-          This produces real directional response — top faces brighten, side faces
+          This produces real directional response: top faces brighten, side faces
           dim, bottom faces fall into ambient. Vanilla's flat tint becomes a
           believable upward-cast warm glow. We add wrap lighting (<code>w = 0.4</code>)
           and an ambient fill term so back-facing surfaces aren't black, then tint
           the whole contribution with torch warmth <code>(1.0, 0.70, 0.40)</code>.
         </p>
 
-        <h4>3 — Held-item point lights</h4>
+        <h4>3. Held-item point lights</h4>
         <p>
           Up to two per frame (both hands), driven by Iris's
           <code>heldBlockLightValue</code> and <code>heldBlockLightValue2</code>. The
@@ -1974,7 +1974,7 @@ footer.colophon {
           $$ a(d, r) = \big( \max(1 - (d/r)^2,\, 0) \big)^2 $$
         </div>
 
-        <h4>4 — Ambient term</h4>
+        <h4>4. Ambient term</h4>
         <p>
           Sampled directly from Minecraft's baked lightmap and added at low weight.
           Prevents the shadow side of objects from going pitch-black in caves
@@ -2007,7 +2007,7 @@ footer.colophon {
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════════
-     07 — SKY & WATER
+     07: SKY & WATER
      ═══════════════════════════════════════════════════════════════════════ -->
 <section class="chapter" id="sky">
   <div class="shell">
@@ -2042,7 +2042,7 @@ footer.colophon {
 
         <p>
           The exponential gives a fast hand-off from the warm horizon to the cool
-          zenith — natural-looking without doing real Mie/Rayleigh scattering.
+          zenith, natural-looking without doing real Mie/Rayleigh scattering.
           Vanilla stars are preserved by detecting their pure-white vertex color
           and passing them through unmodified.
         </p>
@@ -2066,7 +2066,7 @@ footer.colophon {
         </div>
         <div class="sidenote cool">
           <span class="sidenote-label">Why no SSR on water?</span>
-          The water surface is mostly horizontal — reflection rays escape the
+          The water surface is mostly horizontal, so reflection rays escape the
           screen almost immediately. A procedural sky is both faster and less
           artifact-prone.
         </div>
@@ -2079,13 +2079,13 @@ footer.colophon {
           <div class="figure-frame">
             <div class="figure-placeholder"><span>Figure 4A</span><em>Sunrise transition</em></div>
           </div>
-          <div class="figure-caption"><b>Fig. 4A</b>Procedural sky sweeping through dawn — fog-to-sky exponential.</div>
+          <div class="figure-caption"><b>Fig. 4A</b>Procedural sky sweeping through dawn: fog-to-sky exponential.</div>
         </div>
         <div>
           <div class="figure-frame">
             <div class="figure-placeholder"><span>Figure 4B</span><em>Water reflection</em></div>
           </div>
-          <div class="figure-caption"><b>Fig. 4B</b>Schlick-mixed water surface — transparent up close, mirror-like at distance.</div>
+          <div class="figure-caption"><b>Fig. 4B</b>Schlick-mixed water surface: transparent up close, mirror-like at distance.</div>
         </div>
       </div>
     </div>
@@ -2093,7 +2093,7 @@ footer.colophon {
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════════
-     08 — RESULTS
+     08: RESULTS
      ═══════════════════════════════════════════════════════════════════════ -->
 <section class="chapter" id="results">
   <div class="shell">
@@ -2112,7 +2112,7 @@ footer.colophon {
       <div class="figure-frame" style="aspect-ratio: 21/9;">
         <div class="figure-placeholder"><span>Hero capture</span><em>Full-pipeline scene flythrough</em></div>
       </div>
-      <div class="figure-caption"><b>Fig. 5</b>Showpiece capture: a built scene with metal armor, glass buildings, water reflections, dynamic torchlight, and procedural sky — all running together.</div>
+      <div class="figure-caption"><b>Fig. 5</b>Showpiece capture: a built scene with metal armor, glass buildings, water reflections, dynamic torchlight, and procedural sky, all running together.</div>
     </div>
 
     <div class="figure reveal">
@@ -2131,7 +2131,7 @@ footer.colophon {
         </div>
         <div>
           <div class="figure-frame"><div class="figure-placeholder"><span>Result · 04</span><em>Dynamic torchlight</em></div></div>
-          <div class="figure-caption"><b>Fig. 5D</b>Held torch illuminating nearby surfaces — true point-light response.</div>
+          <div class="figure-caption"><b>Fig. 5D</b>Held torch illuminating nearby surfaces: true point-light response.</div>
         </div>
       </div>
     </div>
@@ -2154,10 +2154,10 @@ footer.colophon {
             </tr>
           </thead>
           <tbody>
-            <tr><td>Vanilla Minecraft</td><td>—</td><td>—</td><td>baseline</td></tr>
-            <tr><td>BSDF only</td><td>—</td><td>—</td><td>—</td></tr>
-            <tr><td>BSDF + LabPBR</td><td>—</td><td>—</td><td>—</td></tr>
-            <tr><td>Full pipeline (+ SSR/SSAO)</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>Vanilla Minecraft</td><td>–</td><td>–</td><td>baseline</td></tr>
+            <tr><td>BSDF only</td><td>–</td><td>–</td><td>–</td></tr>
+            <tr><td>BSDF + LabPBR</td><td>–</td><td>–</td><td>–</td></tr>
+            <tr><td>Full pipeline (+ SSR/SSAO)</td><td>–</td><td>–</td><td>–</td></tr>
           </tbody>
         </table>
         <p style="font-size: 13px; color: var(--ink-mute); font-style: italic;">
@@ -2177,7 +2177,7 @@ footer.colophon {
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════════
-     09 — REFLECTIONS / PROBLEMS / LESSONS
+     09: REFLECTIONS / PROBLEMS / LESSONS
      ═══════════════════════════════════════════════════════════════════════ -->
 <section class="chapter" id="problems">
   <div class="shell">
@@ -2200,14 +2200,14 @@ footer.colophon {
         <p>
           Minecraft surfaces shader packs a brightness scalar per pixel, but never
           the positions of the light sources producing it. Every "dynamic" light in
-          our pipeline is therefore an inferred or approximated source — world-up for
+          our pipeline is therefore an inferred or approximated source: world-up for
           block lights, camera-relative for held items. Real point-light positioning
           would require engine-level changes outside a shader pack's scope.
         </p>
 
         <h4>SSR banding and moiré</h4>
         <p>
-          Our first SSR draft showed structured banding across smooth metals — the
+          Our first SSR draft showed structured banding across smooth metals: the
           march steps were perfectly aligned across pixels, creating visible stripes.
           Switching the per-pixel jitter from white noise to interleaved gradient
           noise eliminated the patterning by guaranteeing decorrelation across screen
@@ -2233,7 +2233,7 @@ footer.colophon {
         <h4>LabPBR's overloaded encoding</h4>
         <p>
           The G-channel sentinel for metal flagging (≥230) means a dielectric F₀
-          near the top of its 0.08 range is encoded at G ≈ 229 — one byte away from
+          near the top of its 0.08 range is encoded at G ≈ 229, one byte away from
           becoming a metal. Off-by-one decoder bugs in early development caused
           spurious metallic blocks until we settled on a 229.5 / 254.5 cutoff convention.
         </p>
@@ -2242,12 +2242,12 @@ footer.colophon {
         <ul>
           <li><strong>Physically-based shading dramatically improves consistency</strong>
           across scenes. Tweaking exposure, time of day, and viewing angle no longer
-          breaks the lighting — the math handles it.</li>
+          breaks the lighting; the math handles it.</li>
           <li><strong>Real-time rendering is mostly tradeoff design.</strong> Every
           feature has a quality knob (sample count, march steps, kernel radius) that
           trades visible quality for milliseconds. Knowing where to spend the budget
           matters more than the algorithms.</li>
-          <li><strong>Small details — noise, jitter, edge fades — matter
+          <li><strong>Small details (noise, jitter, edge fades) matter
           disproportionately.</strong> The difference between "almost works" and
           "ships" is often a single line of jitter math.</li>
           <li><strong>Data-driven systems extend cheaply.</strong> Once LabPBR was wired
@@ -2274,7 +2274,7 @@ footer.colophon {
 </section>
 
 <!-- ═══════════════════════════════════════════════════════════════════════
-     10 — TEAM
+     10: TEAM
      ═══════════════════════════════════════════════════════════════════════ -->
 <section class="chapter" id="team">
   <div class="shell">

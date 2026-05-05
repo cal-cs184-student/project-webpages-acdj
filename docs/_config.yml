@@ -4,3 +4,9 @@ theme: just-the-docs
 
 url: https://cal-cs184-student.github.io
 baseurl: /project-webpages-acdj
+
+include:
+  - mc_videos
+
+keep_files:
+  - mc_videos

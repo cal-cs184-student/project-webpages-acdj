@@ -1069,11 +1069,66 @@ footer.colophon {
 .tag.warm { color: var(--warm); border-color: color-mix(in srgb, var(--warm) 40%, transparent); }
 .tag.cool { color: var(--cool); border-color: color-mix(in srgb, var(--cool) 40%, transparent); }
 
-.figure-frame img {
+.figure-frame img,
+.figure-frame video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
+}
+
+.video-link {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-decoration: none;
+  border: none;
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(232,152,84,0.10), transparent 70%),
+    var(--bg-elev);
+  position: relative;
+  z-index: 1;
+  transition: background 280ms ease;
+}
+.video-link:hover {
+  background:
+    radial-gradient(ellipse 60% 50% at 50% 50%, rgba(232,152,84,0.20), transparent 70%),
+    var(--bg-elev);
+}
+.video-link .play-icon {
+  width: 56px;
+  height: 56px;
+  border: 1.5px solid var(--warm);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--warm);
+  font-size: 18px;
+  transition: transform 280ms ease, background 280ms ease;
+}
+.video-link:hover .play-icon {
+  transform: scale(1.08);
+  background: rgba(232,152,84,0.12);
+}
+.video-link .label {
+  font-family: var(--display);
+  font-size: 11px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--warm);
+  font-weight: 500;
+}
+.video-link .title {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 17px;
+  color: var(--ink);
+  font-variation-settings: 'opsz' 36;
 }
 
 </style>
@@ -1588,7 +1643,11 @@ footer.colophon {
         </div>
         <div>
           <div class="figure-frame">
-            <img src="../mc_videos/shader_cobble.gif" alt="Cook-Torrance BRDF on cobblestone — roughness and metallicity response">
+            <a class="video-link" href="https://drive.google.com/file/d/1jDZAFnavjtQjLZXhzQy6RJD_ggMuWSUT/view?usp=sharing" target="_blank" rel="noopener">
+              <div class="play-icon">▶</div>
+              <span class="label">Watch Video</span>
+              <span class="title">Cook-Torrance BRDF</span>
+            </a>
           </div>
           <div class="figure-caption"><b>Fig. 1B</b>Material Lab: surfaces respond to view angle, roughness, and metallicity.</div>
         </div>
@@ -1910,7 +1969,11 @@ footer.colophon {
         </div>
         <div>
           <div class="figure-frame">
-            <img src="../mc_videos/WS-Dynamic-Surface.gif" alt="Scene with ray-marched SSAO — corners darken, geometry grounded">
+            <a class="video-link" href="https://drive.google.com/file/d/1wx98Ia-LM1YfZ01ZbgCqVYHr2usElZQn/view?usp=sharing" target="_blank" rel="noopener">
+              <div class="play-icon">▶</div>
+              <span class="label">Watch Video</span>
+              <span class="title">SSR &amp; SSAO Demo</span>
+            </a>
           </div>
           <div class="figure-caption"><b>Fig. 3B</b>With ray-marched SSAO: corners darken, geometry grounds itself.</div>
         </div>
@@ -2098,20 +2161,14 @@ footer.colophon {
     </div>
 
     <div class="figure reveal">
-      <div class="figure-grid">
-        <div>
-          <div class="figure-frame">
-            <img src="../mc_videos/no_shader_andesite_hall.gif" alt="Andesite hallway without shader — vanilla sky, no atmospheric processing">
-          </div>
-          <div class="figure-caption"><b>Fig. 4A</b>Vanilla sky in the hallway scene: no atmospheric curve, no procedural gradient.</div>
-        </div>
-        <div>
-          <div class="figure-frame">
-            <img src="../mc_videos/WS-Dynamic-left-hand.gif" alt="Dynamic scene with Fresnel water and Schlick-mixed reflection">
-          </div>
-          <div class="figure-caption"><b>Fig. 4B</b>Schlick-mixed water surface: transparent up close, mirror-like at distance.</div>
-        </div>
+      <div class="figure-frame">
+        <a class="video-link" href="https://drive.google.com/file/d/1sUwsq5sYDh6eFHTD9tT7EGkmDmlRss8j/view?usp=sharing" target="_blank" rel="noopener">
+          <div class="play-icon">▶</div>
+          <span class="label">Watch Video</span>
+          <span class="title">Water Reflection</span>
+        </a>
       </div>
+      <div class="figure-caption"><b>Fig. 4</b>Schlick-mixed water surface: transparent up close, mirror-like at distance.</div>
     </div>
   </div>
 </section>

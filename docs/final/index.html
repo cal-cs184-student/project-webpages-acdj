@@ -2160,43 +2160,6 @@ footer.colophon {
       </div>
     </div>
 
-    <div class="prose-grid reveal" style="margin-top: 60px;">
-      <div class="prose">
-        <h3>Performance evaluation</h3>
-        <p>
-          We measured frame time across four configurations, isolating the cost of
-          each pipeline component:
-        </p>
-
-        <table class="perf-table">
-          <thead>
-            <tr>
-              <th>Configuration</th>
-              <th>FPS</th>
-              <th>Frame time</th>
-              <th>vs. Vanilla</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>Vanilla Minecraft</td><td>–</td><td>–</td><td>baseline</td></tr>
-            <tr><td>BSDF only</td><td>–</td><td>–</td><td>–</td></tr>
-            <tr><td>BSDF + LabPBR</td><td>–</td><td>–</td><td>–</td></tr>
-            <tr><td>Full pipeline (+ SSR/SSAO)</td><td>–</td><td>–</td><td>–</td></tr>
-          </tbody>
-        </table>
-        <p style="font-size: 13px; color: var(--ink-mute); font-style: italic;">
-          Numbers to be filled in from final benchmark run.
-        </p>
-      </div>
-
-      <aside class="sidenotes">
-        <div class="sidenote">
-          <span class="sidenote-label">Per-feature cost</span>
-          The expected cost-heavy line items: SSAO (per-pixel ray marching),
-          SSR (longer rays + binary search), and the hand-shader rebuild.
-        </div>
-      </aside>
-    </div>
   </div>
 </section>
 

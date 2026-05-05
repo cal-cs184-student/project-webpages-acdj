@@ -1069,6 +1069,13 @@ footer.colophon {
 .tag.warm { color: var(--warm); border-color: color-mix(in srgb, var(--warm) 40%, transparent); }
 .tag.cool { color: var(--cool); border-color: color-mix(in srgb, var(--cool) 40%, transparent); }
 
+.figure-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 </style>
 </head>
 <body>
@@ -1574,13 +1581,13 @@ footer.colophon {
       <div class="figure-grid">
         <div>
           <div class="figure-frame">
-            <div class="figure-placeholder"><span>Figure 1A</span><em>Vanilla Lambertian</em></div>
+            <img src="../mc_videos/no_shader_cobble.gif" alt="Vanilla Minecraft lighting on cobblestone — flat diffuse">
           </div>
           <div class="figure-caption"><b>Fig. 1A</b>Vanilla Minecraft lighting: flat diffuse, no view-dependent response.</div>
         </div>
         <div>
           <div class="figure-frame">
-            <div class="figure-placeholder"><span>Figure 1B</span><em>Cook-Torrance</em></div>
+            <img src="../mc_videos/shader_cobble.gif" alt="Cook-Torrance BRDF on cobblestone — roughness and metallicity response">
           </div>
           <div class="figure-caption"><b>Fig. 1B</b>Material Lab: surfaces respond to view angle, roughness, and metallicity.</div>
         </div>
@@ -1723,15 +1730,27 @@ footer.colophon {
       <div class="figure-grid">
         <div>
           <div class="figure-frame">
-            <div class="figure-placeholder"><span>Figure 2A</span><em>Bedrock with custom spec map</em></div>
+            <img src="../mc_videos/no_shader_bedrock.gif" alt="Bedrock without shader — vanilla flat shading">
           </div>
-          <div class="figure-caption"><b>Fig. 2A</b>Bedrock with a hand-authored <code>_s</code> texture forces metallic behavior.</div>
+          <div class="figure-caption"><b>Fig. 2A (before)</b>Bedrock under vanilla shading: no metallic response.</div>
         </div>
         <div>
           <div class="figure-frame">
-            <div class="figure-placeholder"><span>Figure 2B</span><em>Andesite, green-channel tuned</em></div>
+            <img src="../mc_videos/shader_bedrock.gif" alt="Bedrock with hand-authored spec map — metallic behavior">
           </div>
-          <div class="figure-caption"><b>Fig. 2B</b>Andesite tuned to behave more metallic, with no shader changes required.</div>
+          <div class="figure-caption"><b>Fig. 2A (after)</b>Bedrock with a hand-authored <code>_s</code> texture forces metallic behavior.</div>
+        </div>
+        <div>
+          <div class="figure-frame">
+            <img src="../mc_videos/no_shader_andesites.gif" alt="Andesite without shader — vanilla appearance">
+          </div>
+          <div class="figure-caption"><b>Fig. 2B (before)</b>Andesite under vanilla shading: dielectric, unremarkable.</div>
+        </div>
+        <div>
+          <div class="figure-frame">
+            <img src="../mc_videos/shader_andesites.gif" alt="Andesite with green-channel tuned spec map — more metallic">
+          </div>
+          <div class="figure-caption"><b>Fig. 2B (after)</b>Andesite tuned to behave more metallic, with no shader changes required.</div>
         </div>
       </div>
     </div>
@@ -1884,27 +1903,27 @@ footer.colophon {
       <div class="figure-grid">
         <div>
           <div class="figure-frame">
-            <div class="figure-placeholder"><span>Figure 3A</span><em>SSAO off</em></div>
+            <img src="../mc_videos/NS-Dynamic-Surface.gif" alt="Scene without SSAO — flat lighting, no contact shadows">
           </div>
           <div class="figure-caption"><b>Fig. 3A</b>Without SSAO: objects float, contact shadows missing.</div>
         </div>
         <div>
           <div class="figure-frame">
-            <div class="figure-placeholder"><span>Figure 3B</span><em>SSAO on</em></div>
+            <img src="../mc_videos/WS-Dynamic-Surface.gif" alt="Scene with ray-marched SSAO — corners darken, geometry grounded">
           </div>
           <div class="figure-caption"><b>Fig. 3B</b>With ray-marched SSAO: corners darken, geometry grounds itself.</div>
         </div>
         <div>
           <div class="figure-frame">
-            <div class="figure-placeholder"><span>Figure 3C</span><em>SSR on metal armor</em></div>
+            <img src="../mc_videos/shader_concrete.gif" alt="Smooth concrete surface with SSR reflections">
           </div>
-          <div class="figure-caption"><b>Fig. 3C</b>Iron armor reflecting the surrounding scene via SSR.</div>
+          <div class="figure-caption"><b>Fig. 3C</b>Smooth concrete with SSR: scene geometry reflected in the low-roughness surface.</div>
         </div>
         <div>
           <div class="figure-frame">
-            <div class="figure-placeholder"><span>Figure 3D</span><em>Env probe fallback</em></div>
+            <img src="../mc_videos/shader_andesite_hall.gif" alt="Andesite hallway showing procedural environment probe on walls">
           </div>
-          <div class="figure-caption"><b>Fig. 3D</b>Procedural environment probe activates where SSR rays escape.</div>
+          <div class="figure-caption"><b>Fig. 3D</b>Procedural environment probe activates where SSR rays escape the screen.</div>
         </div>
       </div>
     </div>
@@ -2081,13 +2100,13 @@ footer.colophon {
       <div class="figure-grid">
         <div>
           <div class="figure-frame">
-            <div class="figure-placeholder"><span>Figure 4A</span><em>Sunrise transition</em></div>
+            <img src="../mc_videos/no_shader_andesite_hall.gif" alt="Andesite hallway without shader — vanilla sky, no atmospheric processing">
           </div>
-          <div class="figure-caption"><b>Fig. 4A</b>Procedural sky sweeping through dawn: fog-to-sky exponential.</div>
+          <div class="figure-caption"><b>Fig. 4A</b>Vanilla sky in the hallway scene: no atmospheric curve, no procedural gradient.</div>
         </div>
         <div>
           <div class="figure-frame">
-            <div class="figure-placeholder"><span>Figure 4B</span><em>Water reflection</em></div>
+            <img src="../mc_videos/WS-Dynamic-left-hand.gif" alt="Dynamic scene with Fresnel water and Schlick-mixed reflection">
           </div>
           <div class="figure-caption"><b>Fig. 4B</b>Schlick-mixed water surface: transparent up close, mirror-like at distance.</div>
         </div>
@@ -2114,28 +2133,28 @@ footer.colophon {
 
     <div class="figure reveal">
       <div class="figure-frame" style="aspect-ratio: 21/9;">
-        <div class="figure-placeholder"><span>Hero capture</span><em>Full-pipeline scene flythrough</em></div>
+        <img src="../mc_videos/shader_andesites.gif" alt="Full-pipeline scene: metallic andesite blocks under Material Lab shader">
       </div>
-      <div class="figure-caption"><b>Fig. 5</b>Showpiece capture: a built scene with metal armor, glass buildings, water reflections, dynamic torchlight, and procedural sky, all running together.</div>
+      <div class="figure-caption"><b>Fig. 5</b>Showpiece capture: andesite blocks rendered with the full Material Lab pipeline — Cook-Torrance BRDF, LabPBR material decode, SSAO, SSR, and procedural environment probe all active.</div>
     </div>
 
     <div class="figure reveal">
       <div class="figure-grid">
         <div>
-          <div class="figure-frame"><div class="figure-placeholder"><span>Result · 01</span><em>Glass + Fresnel</em></div></div>
-          <div class="figure-caption"><b>Fig. 5A</b>Glass buildings with angle-dependent transparency.</div>
+          <div class="figure-frame"><img src="../mc_videos/NS-Dynamic-Hand.gif" alt="Held item without shader — vanilla flat lighting, no point-light response"></div>
+          <div class="figure-caption"><b>Fig. 5A</b>Held item without shader: flat lighting, no warm point-light falloff from the torch.</div>
         </div>
         <div>
-          <div class="figure-frame"><div class="figure-placeholder"><span>Result · 02</span><em>Water SSR</em></div></div>
-          <div class="figure-caption"><b>Fig. 5B</b>Water surface reflecting the procedural sky.</div>
+          <div class="figure-frame"><img src="../mc_videos/no_shader_coppem.gif" alt="Copper without shader — no metallic tint or reflection"></div>
+          <div class="figure-caption"><b>Fig. 5B</b>Copper before shader: no metallic tint, flat and unresponsive.</div>
         </div>
         <div>
-          <div class="figure-frame"><div class="figure-placeholder"><span>Result · 03</span><em>Metallic blocks</em></div></div>
-          <div class="figure-caption"><b>Fig. 5C</b>Bedrock, emerald, and copper showing distinct metallic responses.</div>
+          <div class="figure-frame"><img src="../mc_videos/shader_bedrock.gif" alt="Bedrock with metallic spec map — strong specular and SSR reflections"></div>
+          <div class="figure-caption"><b>Fig. 5C</b>Bedrock with custom spec map: conductor F₀ encoding → full metallic tint and SSR.</div>
         </div>
         <div>
-          <div class="figure-frame"><div class="figure-placeholder"><span>Result · 04</span><em>Dynamic torchlight</em></div></div>
-          <div class="figure-caption"><b>Fig. 5D</b>Held torch illuminating nearby surfaces: true point-light response.</div>
+          <div class="figure-frame"><img src="../mc_videos/WS-Dynamic-hand.gif" alt="Held item with dynamic point-light illumination under Material Lab shader"></div>
+          <div class="figure-caption"><b>Fig. 5D</b>Held torch illuminating nearby surfaces: true point-light response under the Cook-Torrance BRDF.</div>
         </div>
       </div>
     </div>
